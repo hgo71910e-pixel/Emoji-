@@ -37,7 +37,7 @@ log = logging.getLogger("premium_emoji_bot")
 BOT_TOKEN = os.getenv("PREMIUM_EMOJI_BOT_TOKEN", os.getenv("BOT_TOKEN", ""))
 TEMPLATE_PATH = Path(os.getenv(
     "PREMIUM_EMOJI_TEMPLATE",
-    "/home/ecronx/Загрузки/Telegram Desktop/emoji_543170830159.json",
+    "template.json",
 ))
 PACK_PREFIX = os.getenv("PREMIUM_EMOJI_PACK_PREFIX", "premium")
 TEXT_LIMIT = int(os.getenv("PREMIUM_EMOJI_TEXT_LIMIT", "20"))
