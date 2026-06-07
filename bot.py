@@ -44,15 +44,24 @@ TEXT_LIMIT = int(os.getenv("PREMIUM_EMOJI_TEXT_LIMIT", "20"))
 SUBTITLE_LIMIT = int(os.getenv("PREMIUM_EMOJI_SUBTITLE_LIMIT", "18"))
 CANVAS = 512
 
-FONT_TEXT = [
-    "/usr/share/fonts/julietaula-montserrat-fonts/Montserrat-Black.otf",
-    "/home/ecronx/Загрузки/ofont.ru_Montserrat.ttf",
-    "/home/ecronx/Загрузки/eme-v3/eme/fonts/Montserrat.ttf",
-    os.getenv("PREMIUM_EMOJI_FONT", ""),
-    "/usr/share/fonts/google-carlito-fonts/Carlito-Bold.ttf",
-    "/usr/share/fonts/google-droid-sans-fonts/DroidSans-Bold.ttf",
-    "/usr/share/fonts/adwaita-mono-fonts/AdwaitaMono-Bold.ttf",
-]
+def _find_any_font() -> list[str]:
+    import glob
+    candidates = [
+        os.getenv("PREMIUM_EMOJI_FONT", ""),
+        "/usr/share/fonts/julietaula-montserrat-fonts/Montserrat-Black.otf",
+        "/usr/share/fonts/google-carlito-fonts/Carlito-Bold.ttf",
+        "/usr/share/fonts/google-droid-sans-fonts/DroidSans-Bold.ttf",
+        "/usr/share/fonts/adwaita-mono-fonts/AdwaitaMono-Bold.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+        "/usr/share/fonts/truetype/freefont/FreeSansBold.ttf",
+        "/usr/share/fonts/truetype/ubuntu/Ubuntu-B.ttf",
+    ]
+    candidates += glob.glob("/usr/share/fonts/**/*.ttf", recursive=True)
+    candidates += glob.glob("/usr/share/fonts/**/*.otf", recursive=True)
+    return candidates
+
+FONT_TEXT = _find_any_font()
 FONT_EMOJI = "/usr/share/fonts/google-noto-emoji-fonts/NotoEmoji-Regular.ttf"
 FONT_WEIGHT = 900
 
